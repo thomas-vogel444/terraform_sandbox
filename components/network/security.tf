@@ -1,6 +1,6 @@
 resource "aws_network_acl" "public-acl" {
   vpc_id = "${aws_vpc.default-vpc.id}"
-  subnet_ids = ["${aws_subnet.public-subnet}"]
+  subnet_ids = ["${aws_subnet.public-subnet.id}"]
 
   ingress {
     action = "allow"
@@ -9,8 +9,4 @@ resource "aws_network_acl" "public-acl" {
     rule_no = 100
     to_port = 22
   }
-}
-
-resource "aws_network_acl" "private-acl" {
-  vpc_id = "${aws_vpc.default-vpc.id}"
 }
