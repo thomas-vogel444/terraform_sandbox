@@ -1,0 +1,45 @@
+{
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "name": "app",
+            "image": "773209191623.dkr.ecr.eu-west-1.amazonaws.com/upscan_app",
+            "resourceRequirements": null,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": "5000",
+                    "protocol": "tcp"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/upscan_app",
+                    "awslogs-region": "eu-west-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "healthCheck": {
+                "command": [
+                    "curl http://localhost:5000/ping || exit 1"
+                ],
+                "interval": "10",
+                "timeout": "2",
+                "startPeriod": "0",
+                "retries": "5"
+            },
+            "repositoryCredentials": {
+                "credentialsParameter": ""
+            }
+        }
+    ],
+    "volumes": [],
+    "networkMode": "awsvpc",
+    "memory": "1024",
+    "cpu": "512",
+    "executionRoleArn": "<create_new>",
+    "family": "upscan_app"
+}

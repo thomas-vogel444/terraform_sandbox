@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metada: 
+  name: app-config
+  labels:
+    app: toms-app
+data:
+  myKey: myValue
+  anotherKey: anotherValue
