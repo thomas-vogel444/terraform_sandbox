@@ -19,3 +19,19 @@ data "aws_subnet" "private_subnet_b" {
         Name = "Upscan Sandbox Private Subnet B"
     }
 }
+
+data "aws_lb_target_group" "upscan_target_group" {
+    tags {
+        Name = "Upscan Sandbox"
+    }
+}
+
+data "aws_security_group" "ecs_sg" {
+    tags {
+        Name = "Upscan Sandbox Security Group"
+    }
+}
+
+data "aws_iam_role" "ecsTaskDefinitionRole" {
+    name = "ecsTaskExecutionRole"
+}
