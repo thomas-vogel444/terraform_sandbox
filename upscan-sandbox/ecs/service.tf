@@ -4,19 +4,25 @@ data "aws_lb_target_group" "upscan_target_group" {
     }
 }
 
+data "aws_security_group" "ecs_sg" {
+    tags {
+        Name = "Upscan Sandbox Security Group"
+    }
+}
+
+
 resource "aws_ecs_service" "upscan_service" {
     launch_type = "FARGATE"
     task_definition = "upscan_app:5"
     
     cluster = "upscan-cluster"
     name = "upscan_app"
-
     
     desired_count = 2
 
     network_configuration {        
-        subnets = ["${data.aws_subnet.subnet_a.id}", "${data.aws_subnet.subnet_b.id}"]
-        assign_public_ip = true
+        subnets = ["${data.aws_subnet.private_subnet_a.id}", "${data.aws_subnet.private_subnet_b.id}"]
+        security_groups = ["${data.aws_security_group.ecs_sg.id}"]
     }
     
     load_balancer {
