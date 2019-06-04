@@ -13,7 +13,7 @@ resource "aws_ecs_service" "sunny_upload_service" {
     }
     
     load_balancer {
-        target_group_arn = "${data.aws_lb_target_group.upscan_target_group.arn}"
+        target_group_arn = "${data.aws_lb_target_group.sunny_upload_target_group.arn}"
         container_name = "upscan-app"
         container_port = 9000
     }

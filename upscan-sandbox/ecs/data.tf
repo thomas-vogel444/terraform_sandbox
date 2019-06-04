@@ -21,9 +21,11 @@ data "aws_subnet" "private_subnet_b" {
 }
 
 data "aws_lb_target_group" "upscan_target_group" {
-    tags {
-        Name = "Upscan Sandbox"
-    }
+    name = "upscan-target-group"
+}
+
+data "aws_lb_target_group" "sunny_upload_target_group" {
+    name = "sunny-upload-target-group"
 }
 
 data "aws_security_group" "ecs_sg" {

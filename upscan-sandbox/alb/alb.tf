@@ -49,7 +49,7 @@ resource "aws_lb_target_group" "upscan_target_group" {
     # }
 
     tags {
-        Name = "Upscan Sandbox"
+        Name = "Upscan Sandbox Upscan Target Group"
     }
 }
 
